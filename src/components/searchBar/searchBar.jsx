@@ -100,9 +100,10 @@ export default function SearchBar() {
           options={countries}
           value={selectedCountry}
           onChange={setSelectedCountry}
-          placeholder="Select a country"
-          className="w-64"
+          placeholder="Select countries"
+          className="w-full"
           components={{ SingleValue: customSingleValue, Option: customOption }} // Add custom components
+          isMulti // Enable multiple selections
         />
       </AnimatedItem>
 
