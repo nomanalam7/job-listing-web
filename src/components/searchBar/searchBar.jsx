@@ -5,6 +5,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import axios from 'axios';
 
 // Define keyframes for animations
 const fadeIn = keyframes`
@@ -37,6 +40,41 @@ const AnimatedItem = styled.div`
 `;
 
 export default function SearchBar() {
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  console.log(countries, "countries");
+  useEffect(() => {
+    axios.get('https://restcountries.com/v3.1/all')
+      .then(response => {
+        const countryOptions = response.data.map(country => ({
+          value: country.cca2,
+          label: country.name.common,
+          flag: country.flags.svg // Add flag URL
+        }));
+        setCountries(countryOptions);
+      })
+      .catch(error => {
+        console.error('Error fetching countries:', error);
+      });
+  }, []);
+
+  const customSingleValue = ({ data }) => (
+    <div className="flex flex-row items-center">
+      <img src={data.flag} alt="" className="w-5  mr-2" />
+      {data.label}
+    </div>
+  );
+
+  const customOption = (props) => {
+    const { data, innerRef, innerProps } = props;
+    return (
+      <div ref={innerRef} {...innerProps} className="flex items-center p-2">
+        <img src={data.flag} alt="" className="w-5  mr-2" />
+        {data.label}
+      </div>
+    );
+  };
+
   return (
     <AnimatedDiv className="flex items-center shadow-xl rounded-md bg-white p-3 space-x-4">
       {/* Job Title Input */}
@@ -58,18 +96,13 @@ export default function SearchBar() {
 
       {/* Location Input */}
       <AnimatedItem>
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="San Francisco, USA"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LocationOnIcon />
-              </InputAdornment>
-            ),
-          }}
+        <Select
+          options={countries}
+          value={selectedCountry}
+          onChange={setSelectedCountry}
+          placeholder="Select a country"
           className="w-64"
+          components={{ SingleValue: customSingleValue, Option: customOption }} // Add custom components
         />
       </AnimatedItem>
 

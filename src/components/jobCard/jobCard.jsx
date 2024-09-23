@@ -52,7 +52,7 @@ const JobCard = ({ job }) => {
             key={index}
             label={tag}
             icon={<Work />}
-            className="bg-blue-100 text-blue-800 shadow-sm"
+            className="bg-gray-300 text-gray-800 shadow-sm"
           />
         ))}
       </div>

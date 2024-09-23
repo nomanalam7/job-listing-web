@@ -38,7 +38,7 @@ const Filter = () => {
   return (
     <AnimatedDiv className="flex flex-col p-6 bg-white rounded-lg shadow-lg space-y-6">
       {/* Filters */}
-      <div className="flex space-x-6">
+      <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
         <AnimatedItem className="flex flex-col space-y-2">
           <h3 className="font-semibold text-lg text-blue-600">Job Type</h3>
           <FormControlLabel control={<Checkbox icon={<WorkOutline />} checkedIcon={<Work />} />} label="Full Time Job" />
@@ -46,8 +46,6 @@ const Filter = () => {
           <FormControlLabel control={<Checkbox icon={<School />} checkedIcon={<School />} />} label="Internship" />
           <FormControlLabel control={<Checkbox icon={<Home />} checkedIcon={<Home />} />} label="Remote Job" />
           <FormControlLabel control={<Checkbox icon={<Assignment />} checkedIcon={<Assignment />} />} label="Contract" />
-
-
 
           <h3 className="font-semibold text-lg text-blue-600">Salary</h3>
           <div className="flex flex-col space-y-2">
