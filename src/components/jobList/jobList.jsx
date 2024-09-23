@@ -32,7 +32,7 @@ export default function JobListPage() {
       </div>
 
       <div className="container mx-auto mt-8 flex space-x-8">
-        <div className="w-1/4">
+        <div className="w-[40%]">
           <Filter />
         </div>
         <div className="w-3/4 space-y-4">

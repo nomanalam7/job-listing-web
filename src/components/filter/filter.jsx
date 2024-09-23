@@ -1,39 +1,73 @@
+"use client"
 import { TextField, Slider, Checkbox, FormControlLabel } from '@mui/material';
+import { Work, WorkOutline, School, Home, Assignment } from '@mui/icons-material';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+
+// Define keyframes for animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+// Create styled components with animations
+const AnimatedDiv = styled.div`
+  animation: ${fadeIn} 1s ease-in-out;
+`;
+
+const AnimatedItem = styled.div`
+  animation: ${slideIn} 0.5s ease-in-out;
+`;
 
 const Filter = () => {
   return (
-    <div className="flex flex-col p-6 bg-white rounded-lg shadow-lg space-y-6">
-      {/* Search Box */}
-      <div className="flex space-x-4">
-        <TextField fullWidth label="Job Title" variant="outlined" />
-        <TextField fullWidth label="Location" variant="outlined" />
-        <button className="bg-red-500 text-white px-4 py-2 rounded">Search</button>
-      </div>
-
+    <AnimatedDiv className="flex flex-col p-6 bg-white rounded-lg shadow-lg space-y-6">
       {/* Filters */}
       <div className="flex space-x-6">
-        <div className="flex flex-col space-y-4">
-          <h3 className="font-semibold">Job Type</h3>
-          <FormControlLabel control={<Checkbox />} label="Full Time Job" />
-          <FormControlLabel control={<Checkbox />} label="Part Time Job" />
-          <FormControlLabel control={<Checkbox />} label="Internship" />
-          <FormControlLabel control={<Checkbox />} label="Remote Job" />
-          <FormControlLabel control={<Checkbox />} label="Contract" />
-        </div>
+        <AnimatedItem className="flex flex-col space-y-2">
+          <h3 className="font-semibold text-lg text-blue-600">Job Type</h3>
+          <FormControlLabel control={<Checkbox icon={<WorkOutline />} checkedIcon={<Work />} />} label="Full Time Job" />
+          <FormControlLabel control={<Checkbox icon={<WorkOutline />} checkedIcon={<Work />} />} label="Part Time Job" />
+          <FormControlLabel control={<Checkbox icon={<School />} checkedIcon={<School />} />} label="Internship" />
+          <FormControlLabel control={<Checkbox icon={<Home />} checkedIcon={<Home />} />} label="Remote Job" />
+          <FormControlLabel control={<Checkbox icon={<Assignment />} checkedIcon={<Assignment />} />} label="Contract" />
 
-        <div className="flex flex-col space-y-4">
-          <h3 className="font-semibold">Salary</h3>
-          <Slider defaultValue={2000} min={200} max={5000} valueLabelDisplay="auto" />
-        </div>
 
-        <div className="flex flex-col space-y-4">
-          <h3 className="font-semibold">Experience Level</h3>
+
+          <h3 className="font-semibold text-lg text-blue-600">Salary</h3>
+          <div className="flex flex-col space-y-2">
+            <span>Minimum Salary</span>
+            <TextField type="number" placeholder="Enter minimum salary" />
+          </div>
+          <div className="flex flex-col space-y-2">
+            <span>Maximum Salary</span>
+            <TextField type="number" placeholder="Enter maximum salary" />
+          </div>
+        </AnimatedItem>
+
+        <AnimatedItem className="flex flex-col space-y-2">
+          <h3 className="font-semibold text-lg text-blue-600">Experience Level</h3>
           <FormControlLabel control={<Checkbox />} label="Entry/Junior" />
           <FormControlLabel control={<Checkbox />} label="Middle" />
           <FormControlLabel control={<Checkbox />} label="Senior" />
-        </div>
+        </AnimatedItem>
       </div>
-    </div>
+    </AnimatedDiv>
   );
 };
 
