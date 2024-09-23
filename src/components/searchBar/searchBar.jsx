@@ -101,7 +101,7 @@ export default function SearchBar() {
           value={selectedCountry}
           onChange={setSelectedCountry}
           placeholder="Select countries"
-          className="w-full"
+          className="w-full cursor-pointer"
           components={{ SingleValue: customSingleValue, Option: customOption }} // Add custom components
           isMulti // Enable multiple selections
         />
